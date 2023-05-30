@@ -6,8 +6,8 @@ const path = require('path');
 
 const app = express();
 const server = http.createServer(app);
-const io = socketIO(server);
-const port = 'https://international-number-app.vercel.app/';
+const io = socketIO(server).listen(server);
+const port = '3000';
 const TWILIO_AUTH_TOKEN = process.env.TWILIO_AUTH_TOKEN
 
 // Middleware para analizar el cuerpo de las solicitudes

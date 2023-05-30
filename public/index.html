@@ -9,9 +9,9 @@
   <h1>Mensajes</h1>
   <ul id="messages"></ul>
 
-  <script src="socket.io/socket.io.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
   <script>
-    const socket = io();
+     var socket = io.connect(window.location.origin);
 
     // Escuchar eventos del servidor
     socket.on('sms', (data) => {
