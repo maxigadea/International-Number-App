@@ -3,13 +3,13 @@ const http = require('http');
 const socketIO = require('socket.io');
 const twilio = require('twilio');
 const path = require('path');
-
+require('dotenv').config();
 const app = express();
 const server = http.createServer(app);
 const io = socketIO(server).listen(server);
 const port = '3000';
-const TWILIO_AUTH_TOKEN = process.env.TWILIO_AUTH_TOKEN
-const accountSid = process.env.TZ_ACCOUNT_SID
+const authToken = process.env.TWILIO_AUTH_TOKEN
+const accountSid = process.env.TWILIO_ACCOUNT_SID
 
 // Middleware para analizar el cuerpo de las solicitudes
 app.use(express.json());
@@ -29,11 +29,11 @@ io.on('connection', (socket) => {
   });
 });
 
-const client = new twilio(accountSid, TWILIO_AUTH_TOKEN);
+const client = new twilio(accountSid, authToken);
 
 
 // Configuración del servidor para recibir mensajes SMS
-app.post('/sms', twilio.webhook({ validate: false, authToken: TWILIO_AUTH_TOKEN }), (req, res) => {
+app.post('/sms', twilio.webhook({ validate: false, authToken: authToken }), (req, res) => {
   const twilioData = req.body;
   console.log(twilioData);
   // Emitir el mensaje al cliente a través del WebSocket
@@ -41,8 +41,8 @@ app.post('/sms', twilio.webhook({ validate: false, authToken: TWILIO_AUTH_TOKEN 
 
   client.messages.create({
     body: twilioData.Body,
-    from: 'whatsapp:+543764740426', // El número de WhatsApp de Twilio
-    to: 'whatsapp:+543764969155' // El número del destinatario
+    from: 'whatsapp:+14155238886', // El número de WhatsApp de Twilio
+    to: 'whatsapp:+543764740426' // El número del destinatario
   })
   .then(message => console.log(message.sid))
   .catch(err => console.error(err));
