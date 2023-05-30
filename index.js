@@ -29,7 +29,7 @@ io.on('connection', (socket) => {
   });
 });
 
-const client = new twilio(accountSid, authToken);
+const client = new twilio(accountSid, TWILIO_AUTH_TOKEN);
 
 
 // Configuración del servidor para recibir mensajes SMS
