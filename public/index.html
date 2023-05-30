@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recepción de mensajes SMS</title>
+</head>
+<body>
+  <h1>Mensajes</h1>
+  <ul id="messages"></ul>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    const socket = io();
+
+    // Escuchar eventos del servidor
+    socket.on('sms', (data) => {
+      const messages = document.getElementById('messages');
+      const listItem = document.createElement('li');
+      listItem.textContent = `De: ${data.From}, Contenido: ${data.Body}`;
+      messages.appendChild(listItem);
+    });
+  </script>
+</body>
+</html>
