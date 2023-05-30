@@ -45,8 +45,8 @@ app.post('/sms', twilio.webhook({ validate: false, authToken: authToken }), (req
         from: '+13156233324',
         to: '+543764740426'
     })
-    .then(message => console.log(message.sid))
-    .done();
+  .then(message => console.log(message.sid))
+  .catch(err => console.error(err));
 
   res.sendStatus(200);
 });
