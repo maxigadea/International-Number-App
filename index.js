@@ -29,7 +29,7 @@ io.on('connection', (socket) => {
 });
 
 // Configuración del servidor para recibir mensajes SMS
-app.post('/sms', twilio.webhook({ validate: true, authToken: TWILIO_AUTH_TOKEN }), (req, res) => {
+app.post('/sms', twilio.webhook({ validate: false, authToken: TWILIO_AUTH_TOKEN }), (req, res) => {
   const twilioData = req.body;
   console.log(twilioData);
   // Emitir el mensaje al cliente a través del WebSocket
