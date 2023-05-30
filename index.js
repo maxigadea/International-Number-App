@@ -35,13 +35,13 @@ const client = new twilio(accountSid, authToken);
 // Configuración del servidor para recibir mensajes SMS
 app.post('/sms', twilio.webhook({ validate: false, authToken: authToken }), (req, res) => {
   const twilioData = req.body;
-  console.log(twilioData);
+  console.log(twilioData, "twiliodata");
   // Emitir el mensaje al cliente a través del WebSocket
   io.emit('sms', twilioData);
 
   client.messages
     .create({
-        body: 'Prueba',
+        body: twilioData.Body,
         from: '+13156233324',
         to: '+543764740426'
     })
