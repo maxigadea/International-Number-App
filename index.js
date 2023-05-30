@@ -14,6 +14,8 @@ const accountSid = process.env.TWILIO_ACCOUNT_SID
 // Middleware para analizar el cuerpo de las solicitudes
 app.use(express.json());
 
+app.use(express.urlencoded({ extended: false }));
+
 // Ruta para servir el archivo HTML
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/public/index.html');
