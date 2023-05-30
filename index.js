@@ -39,13 +39,14 @@ app.post('/sms', twilio.webhook({ validate: false, authToken: authToken }), (req
   // Emitir el mensaje al cliente a través del WebSocket
   io.emit('sms', twilioData);
 
-  client.messages.create({
-    body: twilioData.Body,
-    from: 'whatsapp:+14155238886', // El número de WhatsApp de Twilio
-    to: 'whatsapp:+543764740426' // El número del destinatario
-  })
-  .then(message => console.log(message.sid))
-  .catch(err => console.error(err));
+  client.messages
+    .create({
+        body: 'Prueba',
+        from: '+13156233324',
+        to: '+543764740426'
+    })
+    .then(message => console.log(message.sid))
+    .done();
 
   res.sendStatus(200);
 });
